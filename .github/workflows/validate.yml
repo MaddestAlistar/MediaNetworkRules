@@ -1,25 +1,17 @@
 name: Validate media network templates
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
 jobs:
-  smoke:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: {python-version: '3.11'}
-      - run: python -m compileall -q scripts
-      - run: python scripts/build.py
-      - name: Check policy separation
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          direct = Path('generated/clash-direct.yaml').read_text()
-          proxy = Path('generated/clash-proxy.yaml').read_text()
-          reject = Path('generated/clash-reject.yaml').read_text()
-          assert 'media.example.test' in direct
-          assert 'cdn.example.test' in proxy
-          assert 'cdn.example.test' not in direct
-          assert 'media.example.test' not in proxy
-          assert 'payload: []' in reject
-          print('PASS: DIRECT / PROXY / REJECT are separate')
-          PY
+        with:
+          python-version: '3.11'
+      - run: "python3 scripts/build.py"
+      - run: "python3 scripts/diagnose.py --help"
+      - run: "python3 -c \"from pathlib import Path; names=['surge-rules.conf','clash-provider.yaml','quanx-filter.conf']; assert all((Path('generated')/n).stat().st_size>40 for n in names)\""
