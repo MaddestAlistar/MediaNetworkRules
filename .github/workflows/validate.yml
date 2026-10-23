@@ -14,4 +14,4 @@ jobs:
           python-version: '3.11'
       - run: "python3 scripts/build.py"
       - run: "python3 scripts/diagnose.py --help"
-      - run: "python3 -c \"from pathlib import Path; names=['surge-rules.conf','clash-provider.yaml','quanx-filter.conf']; assert all((Path('generated')/n).stat().st_size>40 for n in names)\""
+      - run: "python3 -c \"from pathlib import Path; names=['surge-rules.conf','clash-direct.yaml','clash-proxy.yaml','clash-reject.yaml','quanx-filter.conf']; assert all((Path('generated')/n).stat().st_size>40 for n in names)\""
