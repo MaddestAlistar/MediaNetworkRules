@@ -7,10 +7,10 @@
 ## 仓库已准备内容
 
 - [Surge 规则片段](generated/surge-rules.conf) —— 复制到已有配置的 `[Rule]` 中（勿重复插入节头）。
-- [Clash/Mihomo Classical Provider 示例](generated/clash-provider.yaml) —— `payload` 是**规则集**，不是完整可启动的 `config.yaml`；目标策略组必须在主配置的 `rules` / `rule-providers` 中指定。
+- [Clash/Mihomo 直连规则集](generated/clash-direct.yaml) 和 [代理规则集](generated/clash-proxy.yaml) —— **按 DIRECT / PROXY 分开**，以防同一 Provider 中的域名被错误地统一套用策略；另有 [拒绝规则集](generated/clash-reject.yaml)（目前为空）。这些 `payload` 都不是完整可启动的 `config.yaml`，须在主配置的 `rule-providers` / `rules` 中为每组分别指定对应策略。
 - [Quantumult X 规则片段](generated/quanx-filter.conf) —— 包含 `[filter_local]` 区段，不要直接覆盖现有配置。
 - [域名源 CSV](rules/domains.csv)、[私网地址清单](rules/lan-cidrs.txt)。
-- `scripts/build.py`：修改域名后可一键重新生成三种客户端规则。
+- `scripts/build.py`：修改域名后可重新生成 Surge、Quantumult X 和按策略分类的 Clash/Mihomo 规则。
 - [连接排查清单](docs/troubleshooting.md) 与 `scripts/diagnose.py`：不主动扫描网段，只检查手动指定的域名或 URL。
 
 ## 必须先做的两件事

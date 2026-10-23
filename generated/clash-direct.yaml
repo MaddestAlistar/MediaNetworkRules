@@ -1,10 +1,9 @@
-# LiangYou · Clash classical rule-provider payload; no policy assignment in this file
+# LiangYou example DIRECT rule-provider; edit demo hosts first
 payload:
   - 'DOMAIN-SUFFIX,media.example.test'
   - 'DOMAIN-SUFFIX,jellyfin.example.test'
   - 'DOMAIN-SUFFIX,emby.example.test'
   - 'DOMAIN-SUFFIX,nas.example.test'
-  - 'DOMAIN-SUFFIX,cdn.example.test'
   - 'IP-CIDR,10.0.0.0/8,no-resolve'
   - 'IP-CIDR,172.16.0.0/12,no-resolve'
   - 'IP-CIDR,192.168.0.0/16,no-resolve'

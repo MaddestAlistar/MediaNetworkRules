@@ -1,0 +1,3 @@
+# LiangYou example PROXY rule-provider; edit demo hosts first
+payload:
+  - 'DOMAIN-SUFFIX,cdn.example.test'
