@@ -1,0 +1,102 @@
+{
+  "schema": "liangyou.resource-lab/1.0",
+  "id": "MediaNetworkRules",
+  "title": "良友影音网络规则库",
+  "updated": "2026-10-23",
+  "resourceType": "media-network-routing-reference",
+  "importType": "reference-templates-not-ready-to-use",
+  "repository": "https://github.com/MaddestAlistar/MediaNetworkRules",
+  "isDemoData": true,
+  "ruleCount": 5,
+  "domainRules": [
+    {
+      "type": "DOMAIN-SUFFIX",
+      "domain": "media.example.test",
+      "policy": "DIRECT",
+      "note": "演示媒体主机域名，需替换",
+      "isPlaceholder": true
+    },
+    {
+      "type": "DOMAIN-SUFFIX",
+      "domain": "jellyfin.example.test",
+      "policy": "DIRECT",
+      "note": "演示自建 Jellyfin 域名",
+      "isPlaceholder": true
+    },
+    {
+      "type": "DOMAIN-SUFFIX",
+      "domain": "emby.example.test",
+      "policy": "DIRECT",
+      "note": "演示自建 Emby 域名",
+      "isPlaceholder": true
+    },
+    {
+      "type": "DOMAIN-SUFFIX",
+      "domain": "nas.example.test",
+      "policy": "DIRECT",
+      "note": "演示 NAS 管理主机",
+      "isPlaceholder": true
+    },
+    {
+      "type": "DOMAIN-SUFFIX",
+      "domain": "cdn.example.test",
+      "policy": "PROXY",
+      "note": "演示 CDN/远端媒体策略，仅示范",
+      "isPlaceholder": true
+    }
+  ],
+  "lanNetworks": [
+    "10.0.0.0/8",
+    "172.16.0.0/12",
+    "192.168.0.0/16"
+  ],
+  "policies": {
+    "DIRECT": "直连",
+    "PROXY": "代理",
+    "REJECT": "拒绝"
+  },
+  "clientExamples": [
+    {
+      "client": "Surge",
+      "format": "rule-lines",
+      "fileUrl": "https://raw.githubusercontent.com/MaddestAlistar/MediaNetworkRules/main/generated/surge-rules.conf",
+      "content": "# LiangYou · Surge rules; edit *.example.test before using\nDOMAIN-SUFFIX,media.example.test,DIRECT\nDOMAIN-SUFFIX,jellyfin.example.test,DIRECT\nDOMAIN-SUFFIX,emby.example.test,DIRECT\nDOMAIN-SUFFIX,nas.example.test,DIRECT\nDOMAIN-SUFFIX,cdn.example.test,PROXY\nIP-CIDR,10.0.0.0/8,DIRECT,no-resolve\nIP-CIDR,172.16.0.0/12,DIRECT,no-resolve\nIP-CIDR,192.168.0.0/16,DIRECT,no-resolve\n"
+    },
+    {
+      "client": "Clash/Mihomo",
+      "format": "clash-classical-provider",
+      "fileUrl": "https://raw.githubusercontent.com/MaddestAlistar/MediaNetworkRules/main/generated/clash-direct.yaml",
+      "content": "# LiangYou example DIRECT rule-provider; edit demo hosts first\npayload:\n  - 'DOMAIN-SUFFIX,media.example.test'\n  - 'DOMAIN-SUFFIX,jellyfin.example.test'\n  - 'DOMAIN-SUFFIX,emby.example.test'\n  - 'DOMAIN-SUFFIX,nas.example.test'\n  - 'IP-CIDR,10.0.0.0/8,no-resolve'\n  - 'IP-CIDR,172.16.0.0/12,no-resolve'\n  - 'IP-CIDR,192.168.0.0/16,no-resolve'\n"
+    },
+    {
+      "client": "Clash/Mihomo",
+      "format": "clash-classical-provider",
+      "fileUrl": "https://raw.githubusercontent.com/MaddestAlistar/MediaNetworkRules/main/generated/clash-proxy.yaml",
+      "content": "# LiangYou example PROXY rule-provider; edit demo hosts first\npayload:\n  - 'DOMAIN-SUFFIX,cdn.example.test'\n"
+    },
+    {
+      "client": "Clash/Mihomo",
+      "format": "clash-classical-provider",
+      "fileUrl": "https://raw.githubusercontent.com/MaddestAlistar/MediaNetworkRules/main/generated/clash-reject.yaml",
+      "content": "# LiangYou: no REJECT rules yet\npayload: []\n"
+    },
+    {
+      "client": "Quantumult X",
+      "format": "rule-lines",
+      "fileUrl": "https://raw.githubusercontent.com/MaddestAlistar/MediaNetworkRules/main/generated/quanx-filter.conf",
+      "content": "# LiangYou · Quantumult X filter_local; example domains MUST be replaced\n[filter_local]\nhost-suffix,media.example.test,direct\nhost-suffix,jellyfin.example.test,direct\nhost-suffix,emby.example.test,direct\nhost-suffix,nas.example.test,direct\nhost-suffix,cdn.example.test,proxy\nip-cidr,10.0.0.0/8,direct,no-resolve\nip-cidr,172.16.0.0/12,direct,no-resolve\nip-cidr,192.168.0.0/16,direct,no-resolve\n"
+    }
+  ],
+  "resources": {
+    "sourceDomainsCSV": "https://raw.githubusercontent.com/MaddestAlistar/MediaNetworkRules/main/rules/domains.csv",
+    "lanCIDRs": "https://raw.githubusercontent.com/MaddestAlistar/MediaNetworkRules/main/rules/lan-cidrs.txt",
+    "generator": "https://raw.githubusercontent.com/MaddestAlistar/MediaNetworkRules/main/scripts/build.py",
+    "troubleshooting": "https://raw.githubusercontent.com/MaddestAlistar/MediaNetworkRules/main/docs/troubleshooting.md"
+  },
+  "notes": [
+    "示例 .example.test 域名不能直接使用，需要替换自有服务器域名",
+    "Clash/Mihomo 规则需要在主配置中指定策略组",
+    "客户端格式互不等价，使用前应按客户端逐条核对",
+    "不含真实节点或未获授权服务器地址"
+  ]
+}

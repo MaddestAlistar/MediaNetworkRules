@@ -4,6 +4,12 @@
 
 面向 **Emby / Jellyfin / NAS / WebDAV / 家庭影音** 的安全网络配置**模板**，支持 Surge、Clash/Mihomo、Quantumult X 三类规则格式，以及基础故障检查清单。
 
+## JSON 资源入口
+
+**[获取统一 JSON 网络规则目录](https://raw.githubusercontent.com/MaddestAlistar/MediaNetworkRules/main/index.json)**
+
+`index.json` 汇总了域名样例、IP 地址段、策略（DIRECT/PROXY/REJECT）和 Surge/Clash/Quantumult X 的**完整文本示例和原文件下载链接**。它用于机器读取与转换，而不是这些客户端能直接导入的原生 JSON；演示主机名必须自行替换。
+
 ## 仓库已准备内容
 
 - [Surge 规则片段](generated/surge-rules.conf) —— 复制到已有配置的 `[Rule]` 中（勿重复插入节头）。
