@@ -1,0 +1,6 @@
+type,pattern,policy,note
+"DOMAIN-SUFFIX","media.example.test","DIRECT","演示媒体主机域名，需替换"
+"DOMAIN-SUFFIX","jellyfin.example.test","DIRECT","演示自建 Jellyfin 域名"
+"DOMAIN-SUFFIX","emby.example.test","DIRECT","演示自建 Emby 域名"
+"DOMAIN-SUFFIX","nas.example.test","DIRECT","演示 NAS 管理主机"
+"DOMAIN-SUFFIX","cdn.example.test","PROXY","演示 CDN/远端媒体策略，仅示范"
